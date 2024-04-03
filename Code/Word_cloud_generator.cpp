@@ -146,4 +146,28 @@ void delete_space_string(node *&head, node *&last)     //   This function will d
         tem_pre = tem_pre->pre;
     }
 }
+
+
+void delete_nodes(node *&head, node *&last)       // Function for deallocate memory
+{
+    node *tem = head;
+    node* tem_pre = last;
+
+    while (tem != tem_pre)              // Start loop as both node made same at middle of linkedlist Time complecity will be O(log(n))
+    {
+
+        head = head->next;           // increment to next node and for last go to previous node
+        last = last->pre;
+
+        delete tem;
+        delete tem_pre;
+
+        tem = head;
+        tem_pre = last;
+    }
+
+    head = NULL;
+    last = NULL;
+}
+
     
