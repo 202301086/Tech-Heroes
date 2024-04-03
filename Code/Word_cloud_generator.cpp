@@ -92,3 +92,58 @@ void makenodes(node *&head, node *&last, string &s)
         i++;
     }
 }
+
+
+void delete_space_string(node *&head, node *&last)     //   This function will delete node which contain space or new line character
+{
+    node *tem = head;
+    node *tem_pre = last;
+
+    while (tem != tem_pre)      // loop will run As both will point at same node at middle of linkedlist Time complecity will be O(log(n))
+    {
+        if (tem->next != NULL && isspace(tem->next->s[0]))   // check first character of string is space or \n if it then delete this node
+        { 
+            node *space_node = tem->next;
+
+            if (tem->next == last)                        
+            {
+                last = tem;
+                tem->next = NULL;
+            }
+            else
+            {
+                node *p = tem->next->next;
+                tem->next = p;
+                p->pre = tem;
+            }
+
+            delete space_node;   
+            space_node = NULL;
+        }
+
+        if (tem_pre->pre != NULL && isspace(tem_pre->pre->s[0]))    // same as above but start from last check from previous node
+        {
+            node *space_node = tem_pre->pre;
+
+            if (tem_pre->pre == head)
+            {
+                head = tem_pre->next;
+                head->pre = NULL;
+            }
+            else
+            {
+                node *p = tem_pre->pre->pre;
+                tem_pre->pre = p;
+                p->next = tem_pre;
+            }
+
+            delete space_node;
+            space_node = NULL;
+
+        }
+
+        tem = tem->next;
+        tem_pre = tem_pre->pre;
+    }
+}
+    
