@@ -37,3 +37,58 @@ node *searchnode(node *head, node *last, string s)
     }
     return NULL;
 }
+
+
+void makenodes(node *&head, node *&last, string &s)
+{
+    head = new node;
+    head->s = "";
+    head->count = 0;
+    head->next = NULL;
+    head->pre = NULL;
+    last = head;
+
+    int i = 0;
+    string tem = "";
+    while (i < s.size())
+    {
+        while (isspace(s[i]))
+        { 
+            i++;
+        }
+       
+        while (!isspace(s[i]) && i < s.size())
+        {
+            tem += s[i];
+            i++;
+        }
+      
+        if (isspace(s[i]) && isspace(s[i - 1]) && !isspace(s[i + 1]))     
+        {
+            break;
+        }
+
+        tem = lower_string(tem);    
+
+        total_word++;
+        
+        node *p = searchnode(head, last, tem);   // If node not found, create new node and append to end of linked list
+        if (p == NULL)
+        {
+            node *k = new node;
+            k->s = tem;
+            k->count = 1;
+            k->next = NULL;
+            k->pre = last;
+            last->next = k;
+            last = k;
+            unique_word++;
+        }
+        else
+        {
+            p->count++;                          // If found, increment the count
+        }
+        tem = "";
+        i++;
+    }
+}
