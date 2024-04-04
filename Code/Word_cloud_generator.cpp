@@ -147,6 +147,64 @@ void delete_space_string(node *&head, node *&last)     //   This function will d
     }
 }
 
+node *Return_top_node(node *head, node *last)
+{
+    int max = 0;
+    node *MaxNode = NULL;
+    node *tem = head;
+    node *tem_pre = last;
+
+    while (tem != NULL)
+    {
+        if  (tem->count > max)
+        {
+            max = tem->count;
+            MaxNode = tem;
+        }
+        if (tem_pre->count > max)
+        {
+            max = tem_pre->count;
+            MaxNode = tem_pre;
+        }
+        tem = tem->next;
+        tem_pre = tem_pre->pre;
+        }
+
+        return MaxNode;
+    }
+
+void print_top_k(node *head, node *last, int k)  //Function will print top k word which have maximum frequency
+{
+   cout <<"----->> Total word is = " << total_word << endl;  //Give total word in given document
+    cout << "=====>> Unique word is = " << unique_word << endl;  //Give Total unique word in document
+
+    if (k <= 0)
+    {
+        cout << "Enter valid number of word" << endl;
+    }
+    else if (unique_word < k)
+    {
+        cout << "unique words." << endl;
+
+    for (int i = 1; i <= unique_word; i++)
+    {
+        node *p = Return_top_node(head, last);
+        cout << p->s << " " << p->count << endl;
+
+        p->count = 0;
+    }
+    }
+
+    else
+    {
+        for (int i = 1; i <= k; i++)
+        {
+            node *max = Return_top_node(head, last);
+            cout << max->s << " " << max->count << endl;
+
+            max->count = 0;  //We will take max->count as zero so it will not see second time
+        }
+    }
 
 void delete_nodes(node *&head, node *&last)       // Function for deallocate memory
 {
