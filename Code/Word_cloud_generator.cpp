@@ -206,6 +206,35 @@ void print_top_k(node *head, node *last, int k)  //Function will print top k wor
         }
     }
 
+node* delete_node(node* head,node* last,node* middle,node* tem){
+
+    if(tem == head){
+        node* tem1 = tem;
+        head = head->next;
+        head->pre = NULL;
+        delete tem1;
+    }else if(tem == last){
+        node* tem1 = tem;
+        last = last->pre;
+        last->next = NULL;
+        delete tem1;
+    }else if(tem == middle){
+        node* tem1 = tem;
+        middle = middle->pre;
+        middle->next = NULL;
+        delete tem1;
+    }else{
+        node* tem1 = tem;
+        tem->pre->next = tem->next;
+        tem->next->pre = tem->pre;
+        delete tem1;
+    }
+
+    return tem;
+    
+}
+
+
 void delete_nodes(node *&head, node *&last)       // Function for deallocate memory
 {
     node *tem = head;
