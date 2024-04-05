@@ -77,8 +77,10 @@ node *searchnode(node *head, node *last, string s)
 }
 
 
-void makenodes(node *&head, node *&last, string &s)
+void makenodes(node *&head, node *&last, const string &filename)
 {
+
+    
     head = new node;
     head->s = "";
     head->count = 0;
@@ -86,31 +88,25 @@ void makenodes(node *&head, node *&last, string &s)
     head->pre = NULL;
     last = head;
 
-    int i = 0;
-    string tem = "";
-    while (i < s.size())
-    {
-        while (isspace(s[i]))
-        { 
-            i++;
-        }
-       
-        while (!isspace(s[i]) && i < s.size())
-        {
-            tem += s[i];
-            i++;
-        }
-      
-        if (isspace(s[i]) && isspace(s[i - 1]) && !isspace(s[i + 1]))     
-        {
-            break;
-        }
+    ifstream file(filename);
 
+    if (!file.is_open())                // if file was node than give error
+    {
+        cerr << "Unable to open the file." << endl;
+        return ;
+    }
+
+
+    int i = 0;
+    string tem ;
+    while (file>>tem)
+    {
         tem = lower_string(tem);    
 
         total_word++;
         
         node *p = searchnode(head, last, tem);   // If node not found, create new node and append to end of linked list
+
         if (p == NULL)
         {
             node *k = new node;
@@ -121,14 +117,23 @@ void makenodes(node *&head, node *&last, string &s)
             last->next = k;
             last = k;
             unique_word++;
+
+            if(tem.size() == 0 || check_extra(tem) == true){
+                extra_word++;
+            }
+
         }
         else
         {
-            p->count++;                          // If found, increment the count
+            p->count++;                 // If found, increment the count
         }
+
         tem = "";
         i++;
+
     }
+
+       file.close();  
 }
 
 
@@ -158,7 +163,6 @@ node *Return_top_node(node *head,node* middle, node *last)       // give max nod
     node *tem_pre = last;
     node* tem2 = middle;
     
-
     while(tem != tem2_pre && tem2 != tem_pre){
 
         if(tem->count > max){
