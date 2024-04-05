@@ -179,7 +179,7 @@ void print_top_k(node *head,node* middle, node *last, int k)      // Function wi
     
     cout << "||" << setw(25) << setfill(' ') << left<< " Total Readed Word -->  " << setw(8) << setfill(' ') << left<< total_word << setw(4) << setfill(' ') << left<< "||" << endl;
     cout << "||" << setw(25) << setfill(' ') << left<< " Total Unique word --> " << setw(8) << setfill(' ') << left<< unique_word << setw(4) << setfill(' ') << left<< "||" << endl;
-    cout << "||" << setw(25) << setfill(' ') << left<< " Unique Extra word --> " << setw(8) << setfill(' ') << left<< extra_word  << setw(4) << setfill(' ') << left<< "||" << endl
+    cout << "||" << setw(25) << setfill(' ') << left<< " Unique Extra word --> " << setw(8) << setfill(' ') << left<< extra_word  << setw(4) << setfill(' ') << left<< "||" << endl;
     
     cout <<"|"<< setw(34) << setfill('=') << "|" <<"||"<< endl<<endl<<endl;
 
