@@ -202,38 +202,60 @@ node *Return_top_node(node *head,node* middle, node *last)       // give max nod
 
 }
 
-void print_top_k(node *head, node *last, int k)  //Function will print top k word which have maximum frequency
-{
-   cout <<"----->> Total word is = " << total_word << endl;  //Give total word in given document
-    cout << "=====>> Unique word is = " << unique_word << endl;  //Give Total unique word in document
 
-    if (k <= 0)
+void print_top_k(node *head,node* middle, node *last, int k)      // Function will print top k word which have maximum frequnecy
+{
+   
+   cout<<endl<<endl;
+    cout <<"||"<< setw(35) << setfill('=') << "||" << endl;
+
+    // Output the lines with variable values
+    cout << "||" << setw(25) << setfill(' ') << left<< " Total Readed Word -->  " << setw(8) << setfill(' ') << left<< total_word << setw(4) << setfill(' ') << left<< "||" << endl;
+    cout << "||" << setw(25) << setfill(' ') << left<< " Total Unique word --> " << setw(8) << setfill(' ') << left<< unique_word << setw(4) << setfill(' ') << left<< "||" << endl;
+    cout << "||" << setw(25) << setfill(' ') << left<< " Unique Extra word --> " << setw(8) << setfill(' ') << left<< extra_word  << setw(4) << setfill(' ') << left<< "||" << endl;
+    
+      cout <<"|"<< setw(34) << setfill('=') << "|" <<"||"<< endl<<endl<<endl;
+
+    if (k <= 0)           
     {
         cout << "Enter valid number of word" << endl;
     }
     else if (unique_word < k)
     {
-        cout << "unique words." << endl;
+        
+        cout<<" NOTE : Sorry we have only " << unique_word << " unique words.   " << endl;
+        cout<<endl;
 
-    for (int i = 1; i <= unique_word; i++)
-    {
-        node *p = Return_top_node(head, last);
-        cout << p->s << " " << p->count << endl;
+        cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+        cout <<"|"<< left << setw(20) << " Word" << setw(10) << "Frequency" <<" |"<< endl;
+        cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+        
+        for (int i = 1; i <= unique_word; i++)
+        {
+            node *max = Return_top_node(head,middle, last);
 
-        p->count = 0;
+            cout <<"| "<< left << setw(20) <<max->s<< setw(10) <<max->count<<"|"<< endl;
+            max->count = 0;
+        }
+         cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+
     }
-    }
-
     else
     {
+        cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+        cout <<"|"<< left << setw(20) << " Word" << setw(10) << "Frequency" <<" |"<< endl;
+        cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
         for (int i = 1; i <= k; i++)
         {
-            node *max = Return_top_node(head, last);
-            cout << max->s << " " << max->count << endl;
-
-            max->count = 0;  //We will take max->count as zero so it will not see second time
+            node *max = Return_top_node(head,middle,last);
+            cout <<"| "<< left << setw(20) <<max->s<< setw(10) <<max->count<<"|"<< endl;
+            
+            max->count = 0;                              // we will take max->count as zero so it will not see second time
         }
+        cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
     }
+}
+
 
 node* delete_node(node* head,node* last,node* middle,node* tem){
 
