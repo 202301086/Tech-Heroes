@@ -132,59 +132,6 @@ void makenodes(node *&head, node *&last, string &s)
 }
 
 
-void delete_space_string(node *&head, node *&last)     //   This function will delete node which contain space or new line character
-{
-    node *tem = head;
-    node *tem_pre = last;
-
-    while (tem != tem_pre)      // loop will run As both will point at same node at middle of linkedlist Time complecity will be O(log(n))
-    {
-        if (tem->next != NULL && isspace(tem->next->s[0]))   // check first character of string is space or \n if it then delete this node
-        { 
-            node *space_node = tem->next;
-
-            if (tem->next == last)                        
-            {
-                last = tem;
-                tem->next = NULL;
-            }
-            else
-            {
-                node *p = tem->next->next;
-                tem->next = p;
-                p->pre = tem;
-            }
-
-            delete space_node;   
-            space_node = NULL;
-        }
-
-        if (tem_pre->pre != NULL && isspace(tem_pre->pre->s[0]))    // same as above but start from last check from previous node
-        {
-            node *space_node = tem_pre->pre;
-
-            if (tem_pre->pre == head)
-            {
-                head = tem_pre->next;
-                head->pre = NULL;
-            }
-            else
-            {
-                node *p = tem_pre->pre->pre;
-                tem_pre->pre = p;
-                p->next = tem_pre;
-            }
-
-            delete space_node;
-            space_node = NULL;
-
-        }
-
-        tem = tem->next;
-        tem_pre = tem_pre->pre;
-    }
-}
-
 node* give_middle_Node(node* head){
 
     node* tem = head;
@@ -193,35 +140,63 @@ node* give_middle_Node(node* head){
     while(tem2 != NULL && tem2->next != NULL){
         tem = tem->next;
         tem2 = tem2->next->next;
-}
+   }
     return tem;
 }
 
-node *Return_top_node(node *head, node *last)
+
+
+node *Return_top_node(node *head,node* middle, node *last)       // give max node which have maximum count
 {
+
     int max = 0;
-    node *MaxNode = NULL;
+    node *maxNode = NULL;
+
     node *tem = head;
+    node* tem2_pre = middle;
+
     node *tem_pre = last;
+    node* tem2 = middle;
+    
 
-    while (tem != NULL)
-    {
-        if  (tem->count > max)
-        {
+    while(tem != tem2_pre && tem2 != tem_pre){
+
+        if(tem->count > max){
+
             max = tem->count;
-            MaxNode = tem;
-        }
-        if (tem_pre->count > max)
-        {
-            max = tem_pre->count;
-            MaxNode = tem_pre;
-        }
-        tem = tem->next;
-        tem_pre = tem_pre->pre;
+            maxNode = tem;
         }
 
-        return MaxNode;
+        if(tem2_pre->count > max){
+
+            max = tem2_pre->count;
+            maxNode = tem2_pre;
+
+        }
+
+        tem = tem->next;
+        tem2_pre = tem2_pre->pre;
+
+        if(tem2->count > max){
+
+            max = tem2->count;
+            maxNode = tem2;
+        }
+
+        if(tem_pre->count > max){
+
+            max = tem_pre->count;
+            maxNode = tem_pre;
+        }
+
+        tem2 = tem2->next;
+        tem_pre = tem_pre->pre;
     }
+    
+
+    return maxNode;
+
+}
 
 void print_top_k(node *head, node *last, int k)  //Function will print top k word which have maximum frequency
 {
