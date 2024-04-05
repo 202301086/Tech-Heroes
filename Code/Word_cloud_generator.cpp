@@ -1,8 +1,12 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
 using namespace std;
 
 int total_word = 0;
 int unique_word = 0;
+int extra_word = 0;
 
 const int n = 136;
 const string arr[n] = {"a", "able", "about", "above", "across", "after", "all", "almost", "also", 
@@ -30,29 +34,20 @@ public:
 
 
 bool check_extra(string s){
-
     bool check = false;
-
-    for(int i=0;i<=n/2;i++){
-        
+    for(int i=0;i<=n/2;i++){      
         if(arr[i] == s){
             check = true;
             break;
         }
-
         if(arr[n-i-1] == s){
             check = true;
             break;
         }
-
     }
-
     return check;
-
 }
 
-// Function to search for a node with a specific string value within a doubly linked list.
-// It starts searching from both ends (head and last) simultaneously, moving towards the middle of the list.
 node *searchnode(node *head, node *last, string s)
 {
     node *tem = head;
@@ -64,12 +59,10 @@ node *searchnode(node *head, node *last, string s)
         {
             return tem;
         }
-
         if (tem_pre->s == s)
         {
             return tem_pre;
         }
-
         tem = tem->next;
         tem_pre = tem_pre->pre;
     }
@@ -78,9 +71,7 @@ node *searchnode(node *head, node *last, string s)
 
 
 void makenodes(node *&head, node *&last, const string &filename)
-{
-
-    
+{   
     head = new node;
     head->s = "";
     head->count = 0;
@@ -89,22 +80,18 @@ void makenodes(node *&head, node *&last, const string &filename)
     last = head;
 
     ifstream file(filename);
-
     if (!file.is_open())                // if file was node than give error
     {
         cerr << "Unable to open the file." << endl;
         return ;
     }
 
-
     int i = 0;
     string tem ;
     while (file>>tem)
     {
         tem = lower_string(tem);    
-
-        total_word++;
-        
+        total_word++;      
         node *p = searchnode(head, last, tem);   // If node not found, create new node and append to end of linked list
 
         if (p == NULL)
@@ -121,24 +108,19 @@ void makenodes(node *&head, node *&last, const string &filename)
             if(tem.size() == 0 || check_extra(tem) == true){
                 extra_word++;
             }
-
         }
         else
         {
-            p->count++;                 // If found, increment the count
+            p->count++;             
         }
-
         tem = "";
         i++;
-
     }
-
        file.close();  
 }
 
 
 node* give_middle_Node(node* head){
-
     node* tem = head;
     node* tem2 = head;
 
@@ -149,11 +131,8 @@ node* give_middle_Node(node* head){
     return tem;
 }
 
-
-
 node *Return_top_node(node *head,node* middle, node *last)       // give max node which have maximum count
 {
-
     int max = 0;
     node *maxNode = NULL;
 
@@ -164,7 +143,6 @@ node *Return_top_node(node *head,node* middle, node *last)       // give max nod
     node* tem2 = middle;
     
     while(tem != tem2_pre && tem2 != tem_pre){
-
         if(tem->count > max){
 
             max = tem->count;
@@ -172,23 +150,19 @@ node *Return_top_node(node *head,node* middle, node *last)       // give max nod
         }
 
         if(tem2_pre->count > max){
-
             max = tem2_pre->count;
             maxNode = tem2_pre;
-
         }
 
         tem = tem->next;
         tem2_pre = tem2_pre->pre;
 
         if(tem2->count > max){
-
             max = tem2->count;
             maxNode = tem2;
         }
 
         if(tem_pre->count > max){
-
             max = tem_pre->count;
             maxNode = tem_pre;
         }
@@ -196,33 +170,26 @@ node *Return_top_node(node *head,node* middle, node *last)       // give max nod
         tem2 = tem2->next;
         tem_pre = tem_pre->pre;
     }
-    
-
     return maxNode;
-
 }
 
-
 void print_top_k(node *head,node* middle, node *last, int k)      // Function will print top k word which have maximum frequnecy
-{
-   
-   cout<<endl<<endl;
-    cout <<"||"<< setw(35) << setfill('=') << "||" << endl;
-
-    // Output the lines with variable values
+{ 
+    cout<<endl<<endl;
+    cout <<"||"<< setw(35) << setfill('=') << "||" << endl;   
+    
     cout << "||" << setw(25) << setfill(' ') << left<< " Total Readed Word -->  " << setw(8) << setfill(' ') << left<< total_word << setw(4) << setfill(' ') << left<< "||" << endl;
     cout << "||" << setw(25) << setfill(' ') << left<< " Total Unique word --> " << setw(8) << setfill(' ') << left<< unique_word << setw(4) << setfill(' ') << left<< "||" << endl;
-    cout << "||" << setw(25) << setfill(' ') << left<< " Unique Extra word --> " << setw(8) << setfill(' ') << left<< extra_word  << setw(4) << setfill(' ') << left<< "||" << endl;
+    cout << "||" << setw(25) << setfill(' ') << left<< " Unique Extra word --> " << setw(8) << setfill(' ') << left<< extra_word  << setw(4) << setfill(' ') << left<< "||" << endl
     
-      cout <<"|"<< setw(34) << setfill('=') << "|" <<"||"<< endl<<endl<<endl;
+    cout <<"|"<< setw(34) << setfill('=') << "|" <<"||"<< endl<<endl<<endl;
 
     if (k <= 0)           
     {
         cout << "Enter valid number of word" << endl;
     }
     else if (unique_word < k)
-    {
-        
+    {     
         cout<<" NOTE : Sorry we have only " << unique_word << " unique words.   " << endl;
         cout<<endl;
 
@@ -280,21 +247,17 @@ node* delete_node(node* head,node* last,node* middle,node* tem){
         tem->next->pre = tem->pre;
         delete tem1;
     }
-
-    return tem;
-    
+    return tem;   
 }
 
 
-void delete_nodes(node *&head, node *&last)       // Function for deallocate memory
+void delete_all(node *&head, node *&last)      
 {
     node *tem = head;
     node* tem_pre = last;
-
-    while (tem != tem_pre)              // Start loop as both node made same at middle of linkedlist Time complecity will be O(log(n))
+    while (tem != tem_pre)              
     {
-
-        head = head->next;           // increment to next node and for last go to previous node
+        head = head->next;           
         last = last->pre;
 
         delete tem;
@@ -303,19 +266,15 @@ void delete_nodes(node *&head, node *&last)       // Function for deallocate mem
         tem = head;
         tem_pre = last;
     }
-
     head = NULL;
     last = NULL;
 }
-
-
 
 int main()
 {
     string filepath;
     cout << "Enter file name : ";
     getline(cin, filepath);
-
 
     ifstream file(filepath); // Attempt to open the file directly for debugging
 
@@ -335,9 +294,7 @@ int main()
     node* middle = NULL;
 
     makenodes(head, last,filepath);
-
     middle = give_middle_Node(head);
-
     delete_extra(head,middle,last);
     
     int k;
@@ -345,8 +302,7 @@ int main()
     cin >> k;
 
     print_top_k(head,middle,last,k);
-
-    delete_nodes(head, last);
+    delete_all(head, last);
 
     return 0;
 }
