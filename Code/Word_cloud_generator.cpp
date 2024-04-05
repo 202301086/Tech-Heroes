@@ -229,11 +229,13 @@ void delete_nodes(node *&head, node *&last)       // Function for deallocate mem
 }
 
 
+
 int main()
 {
     string filepath;
     cout << "Enter file name : ";
-    cin >> filepath;
+    getline(cin, filepath);
+
 
     ifstream file(filepath); // Attempt to open the file directly for debugging
 
@@ -248,20 +250,21 @@ int main()
         file.close(); // Close the file if opened successfully
     }
 
-    string s = copyDocumentToString(filepath);
-
     node *head = NULL;
     node *last = NULL;
+    node* middle = NULL;
 
-    makenodes(head, last, s);
+    makenodes(head, last,filepath);
 
-    delete_space_string(head, last);
+    middle = give_middle_Node(head);
 
+    delete_extra(head,middle,last);
+    
     int k;
     cout << "Enter value of k : ";
     cin >> k;
 
-    print_top_k(head, last, k);
+    print_top_k(head,middle,last,k);
 
     delete_nodes(head, last);
 
