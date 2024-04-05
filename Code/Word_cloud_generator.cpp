@@ -53,7 +53,7 @@ node *searchnode(node *head, node *last, string s)
     node *tem = head;
     node *tem_pre = last;
 
-    while (tem != NULL)
+    while (tem != tem_pre)
     {
         if (tem->s == s)
         {
@@ -118,7 +118,6 @@ void makenodes(node *&head, node *&last, const string &filename)
     }
        file.close();  
 }
-
 
 node* give_middle_Node(node* head){
     node* tem = head;
@@ -223,7 +222,6 @@ void print_top_k(node *head,node* middle, node *last, int k)      // Function wi
     }
 }
 
-
 node* delete_node(node* head,node* last,node* middle,node* tem){
 
     if(tem == head){
@@ -249,7 +247,6 @@ node* delete_node(node* head,node* last,node* middle,node* tem){
     }
     return tem;   
 }
-
 
 void delete_all(node *&head, node *&last)      
 {
