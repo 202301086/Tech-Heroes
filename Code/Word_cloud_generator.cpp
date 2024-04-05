@@ -147,6 +147,18 @@ void delete_space_string(node *&head, node *&last)     //   This function will d
     }
 }
 
+node* give_middle_Node(node* head){
+
+    node* tem = head;
+    node* tem2 = head;
+
+    while(tem2 != NULL && tem2->next != NULL){
+        tem = tem->next;
+        tem2 = tem2->next->next;
+}
+    return tem;
+}
+
 node *Return_top_node(node *head, node *last)
 {
     int max = 0;
