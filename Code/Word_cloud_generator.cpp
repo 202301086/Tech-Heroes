@@ -48,6 +48,17 @@ bool check_extra(string s){
     return check;
 }
 
+string lower_string(string s)        // Function for make string lower so we can search node Eeasily
+{
+    string s1;
+
+    for (int i = 0; i < s.size(); i++)
+    {
+        s1 += tolower(s[i]);
+    }
+    return s1;
+}
+
 node *searchnode(node *head, node *last, string s)
 {
     node *tem = head;
@@ -252,7 +263,7 @@ void delete_extra (node* &head, node* middle, node* &last)
 {
     node* tem = head;
     node* middle1 = middle;
-    node/ middle2 = middle;
+    node* middle2 = middle;
     node* tem_pre = last;
 
     while((tem != middle) && (tem_pre != middle2))
@@ -268,7 +279,7 @@ void delete_extra (node* &head, node* middle, node* &last)
         }
 
         // Similar checks and deletion for previous node of tem_pre
-        if(tem_pre->pre && (tem_pre->pre->s.size() == 1 || ckecks_extra(tem_pre->pre>s)))
+        if(tem_pre->pre && (tem_pre->pre->s.size() == 1 || check_extra(tem_pre->pre->s)))
         {
             tem_pre = delete_node(head, last, middle, tem_pre->pre);
         }
@@ -287,13 +298,13 @@ void delete_extra (node* &head, node* middle, node* &last)
             middle1 = middle1->pre;
         }
 
-        if(middle2->pre && (middle2->pre->s.size() == 1 || check_extra(middle2->pre->s)))
+        if(middle2->next && (middle2->next->s.size() == 1 || check_extra(middle2->next->s)))
         {
-            middle2 = delete_node(head, last, middle, middle2->pre);
+            middle2 = delete_node(head, last, middle, middle2->next);
         }
         else
         {
-            middle2 = middle2->pre;
+            middle2 = middle2->next;
         }
     }
 }
@@ -350,7 +361,7 @@ int main()
     cin >> k;
 
     print_top_k(head,middle,last,k);
-    delete_all(head, last);
+    delete_All(head, last);
 
     return 0;
 }
