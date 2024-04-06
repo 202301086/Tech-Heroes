@@ -1,4 +1,33 @@
 
+void make_nodes(const string &s)
+{
+    total_words++;
+    if (head == NULL)           // if first node 
+    {
+        head = new node(s);
+        last = head;
+        unique_words++;
+        return;
+    }
+
+    node *tem = head;       
+    while (tem != NULL)     // check if this string's node is exist or not
+    {
+        if (tem->s == s)
+        {
+            tem->count++;      // if exist increase the count
+            return;
+        }
+        tem = tem->next;
+    }
+
+    node *n = new node(s);     // else make a new node
+    last->next = n;
+    n->pre = last;
+    last = n;
+    unique_words++;
+}
+
 void delete_extra_words()            // function delete extra word with use of delete_node function
 {
     node *tem = head;
