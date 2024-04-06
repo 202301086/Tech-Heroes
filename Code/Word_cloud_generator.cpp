@@ -2,6 +2,12 @@
 void make_nodes(const string &s)
 {
     total_words++;
+    
+    if(s.size() == 1 || arrs.find(s) != arrs.end()){
+        extra_words++;
+        return;
+    }
+    
     if (head == NULL)           // if first node 
     {
         head = new node(s);
@@ -52,25 +58,6 @@ void delete_node(node *node)       // Function for delete specific node we use f
 
     }
     delete node;
-}
-
-void delete_extra_words()            // function delete extra word with use of delete_node function
-{
-    node *tem = head;
-    while (tem != NULL)
-    {
-        if (tem->s.size() == 1 || arrs.find(tem->s) != arrs.end())
-        {
-            node *tem1 = tem;
-            tem = tem->next;
-            delete_node(tem1);
-            extra_words++;
-        }
-        else
-        {
-            tem = tem->next;
-        }
-    }
 }
 
 
