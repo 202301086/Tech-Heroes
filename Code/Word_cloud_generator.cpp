@@ -27,6 +27,32 @@ void make_nodes(const string &s)
     last = n;
     unique_words++;
 }
+void delete_node(node *node)       // Function for delete specific node we use for delete extra word's node
+{
+    if (node == NULL){      
+        return;
+    }
+
+    if (node == head)
+    {
+        head = head->next;
+        if (head != NULL){
+            head->pre = NULL;
+        }
+    }
+    else
+    {
+        node->pre->next = node->next;          // delete node from linked list
+
+        if (node != last){
+            node->next->pre = node->pre;
+        }else{
+            last = node->pre;
+        }
+
+    }
+    delete node;
+}
 
 void delete_extra_words()            // function delete extra word with use of delete_node function
 {
