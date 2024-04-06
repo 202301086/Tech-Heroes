@@ -248,6 +248,44 @@ node* delete_node(node* head,node* last,node* middle,node* tem){
     return tem;   
 }
 
+void delete_extra(node* &head, node* &middle, node* &last){
+
+    node* tem = head;   
+    node* middle1 = middle;
+    node* middle2 = middle;
+    node* tem_pre = last;
+
+    while((tem != middle1) && (tem_pre != middle2)){
+
+        // Check if the next node's string size is 1 or if it's in the predefined array
+        if(tem->next && (tem->next->s.size() == 1 || check_extra(tem->next->s))){
+            tem = delete_node(head, last, middle, tem->next); // Delete the node and move tem to the next node
+        } else {
+            tem = tem->next; // Move to the next node
+        }
+
+        // Similar checks and deletion for previous node of tem_pre
+        if(tem_pre->pre && (tem_pre->pre->s.size() == 1 || check_extra(tem_pre->pre->s))){
+            tem_pre = delete_node(head, last, middle, tem_pre->pre);
+        } else {
+            tem_pre = tem_pre->pre;
+        }
+
+        // Similar checks and deletion for middle1 and middle2
+        if(middle1->pre && (middle1->pre->s.size() == 1 || check_extra(middle1->pre->s))){
+            middle1 = delete_node(head, last, middle, middle1->pre);
+        } else {
+            middle1 = middle1->pre;
+        }
+
+        if(middle2->next && (middle2->next->s.size() == 1 || check_extra(middle2->next->s))){
+            middle2 = delete_node(head, last, middle, middle2->next);
+        } else {
+            middle2 = middle2->next;
+        }
+    }
+}
+
 void delete_all(node *&head, node *&last)      
 {
     node *tem = head;
