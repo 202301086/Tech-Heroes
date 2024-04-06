@@ -299,24 +299,24 @@ void delete_extra (node* &head, node* middle, node* &last)
 }
        
 
-void delete_all(node *&head, node *&last)      
+void delete_All(node* &head, node* &last) // Function for deallocate memory
 {
-    node *tem = head;
+    node* tem = head;
     node* tem_pre = last;
-    while (tem != tem_pre)              
-    {
-        head = head->next;           
-        last = last->pre;
 
+    while (tem != tem_pre)  //start loop as both node made same at middle of linkedlist time complexity will be 0(log(n))
+    {
+        head = head->next;  // increment to next node and for last go to previous node
+        last = last->pre;
         delete tem;
         delete tem_pre;
 
         tem = head;
         tem_pre = last;
     }
-    head = NULL;
-    last = NULL;
-}
+        head = NULL;
+        last = NULL;
+    }
 
 int main()
 {
