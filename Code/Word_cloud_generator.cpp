@@ -36,7 +36,7 @@ class node         // make a class of node so we can make linked list
     node *next;
     node *pre;
 
-    node(string s){
+    node(string s)
         this->s = s;
         this->count = 1;
         this->next = NULL;
@@ -99,3 +99,45 @@ bool compareNodes(const node *a, const node *b) {
     return a->count > b->count;
 }
 
+
+void print_top_k_words(int k)       // Function for print top k word
+{
+   cout<<endl<<endl;
+   cout <<"||"<< setw(35) << setfill('=') << "||" << endl;      // make design to print total, unique and extra words
+
+    // Output the lines with variable values
+    cout << "||" << setw(25) << setfill(' ') << left<< " Total Readed s -->  " << setw(8) << setfill(' ') << left<< total_words << setw(4) << setfill(' ') << left<< "||" << endl;
+    cout << "||" << setw(25) << setfill(' ') << left<< " Total Unique s --> " << setw(8) << setfill(' ') << left<< unique_words << setw(4) << setfill(' ') << left<< "||" << endl;
+    cout << "||" << setw(25) << setfill(' ') << left<< " Unique Extra s --> " << setw(8) << setfill(' ') << left<< extra_words << setw(4) << setfill(' ') << left<< "||" << endl;
+    
+    cout <<"|" << setw(34) << setfill('=') << "|" <<"||"<< endl<<endl<<endl;
+
+    if(k <= 0){
+        cout<<"Enter valid number ..."<<endl;    // if user enter k as negative then print error
+        return;
+    }
+
+
+    vector<node *> sorted_nodes;    // make a vector which contain linked list 
+    node *tem = head;
+
+    while (tem != NULL)
+    {
+        sorted_nodes.push_back(tem);    // add linkedlist's element in vector
+        tem = tem->next;
+    }
+
+    sort(sorted_nodes.begin(), sorted_nodes.end(),compareNodes);   // sort linked list
+    
+    cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+    cout <<"|"<< left << setw(20) << "Words" << setw(10) << "Frequency" <<" |"<< endl;  
+    cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+        
+
+    for (int i = 0; i < min(k, unique_words); i++)
+    {
+        cout <<"| "<< left << setw(20) << sorted_nodes[i]->s << setw(10) << sorted_nodes[i]->count <<"|"<< endl;  // print top k
+    }
+
+    cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+}
