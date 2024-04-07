@@ -33,6 +33,11 @@ void make_nodes(const string &s)
     last = n;
     unique_words++;
 }
+
+bool compareNodes(const node *a, const node *b) {
+    return a->count > b->count;
+}
+
 void delete_node(node *node)       // Function for delete specific node we use for delete extra word's node
 {
     if (node == NULL){      
