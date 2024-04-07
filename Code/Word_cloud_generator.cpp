@@ -190,3 +190,161 @@ void search_frequency(string s1){
     }
 
 }
+
+
+void search_word(int f){       // this function search word in linked list and print its frequency
+
+    if(f <= 0){
+        cout<<"|--------------------------------|"<<endl;
+        cout<<"| Given frequency is in valid... |"<<endl;
+        cout<<"|--------------------------------|"<<endl;
+        return;
+    }
+
+    int check = 0;
+    node *tem = head;
+    node* tem_pre = last;
+
+    while(tem != tem_pre){            // it take O(n/2) time complexity
+
+        if(tem->count == f){
+            check = 1;
+            break;
+        }
+
+        if(tem_pre->count == f){
+            check = 1;
+            break;       
+        }
+
+        tem = tem->next;
+        tem_pre = tem_pre->pre;
+    }
+
+    if(check == 0){                  // if word not found then give message
+        cout<<"Word not found"<<endl;
+    }else{                          // else print word and it's frequnecy
+
+        node *tem = head;
+        node* tem_pre = last;
+
+        cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+        cout <<"|"<< left << setw(20) << "Words" << setw(10) << "Frequency" <<" |"<< endl;  
+        cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+
+    while(tem != tem_pre){
+
+        if(tem->count == f){
+            cout <<"| "<< left << setw(20) << tem->s << setw(10) << tem->count <<"|"<< endl;           
+        }
+
+        if(tem_pre->count == f){
+            cout <<"| "<< left << setw(20) << tem_pre->s << setw(10) << tem_pre->count <<"|"<< endl;
+        }
+
+        tem = tem->next;
+        tem_pre = tem_pre->pre;
+    }  
+
+    cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl <<endl;
+
+    }
+
+}
+
+void delete_All()      // delete all nodes from linked list
+{
+    node *tem = head;
+    while (tem != NULL)
+    {
+        node *tem1 = tem;
+        tem = tem->next;
+        delete tem1;
+    }
+}
+
+
+
+int main()
+{
+    string filename;               
+    cout << "Enter file name :- ";      // take input as file's name
+    cin>>filename;
+
+    ifstream file(filename);        // open file in reading mode
+    if (!file.is_open())           // if not file open then print error message
+    {
+        cerr << "Unable to open the file." << endl;
+        return 1;
+    }else{                         // if file open successfully then print message
+        cout<<"File opened successfully"<<endl;
+    }
+
+    string s;
+    while (file >> s)
+    {
+        s = lower_string(s);
+        make_nodes(s);            // take each string from file and store in linked list
+    }
+
+    file.close();                // close file when linke list created
+    
+    //delete_extra_words()       // delete extra word from linked list
+
+
+    cout<<endl<<endl;
+
+
+    cout << "|============================================|" << endl;
+    cout << "| PRESS |     MENU                           |" << endl;
+    cout << "|-------|------------------------------------|" << endl;
+    cout << "|  1    | Print top k word                   |" << endl;
+    cout << "|  2    | Search word's frequency            |" << endl;
+    cout << "|  3    | Search specific frequency's word   |" << endl;
+    cout << "|  4/0  | Exit                               |" << endl;
+    cout << "|============================================|" << endl << endl;
+
+
+    while(1){
+
+    int tem;
+    cout<<" Enter your choice : ";
+    cin>>tem;
+
+    if(tem == 1){
+          int k;
+          cout<<" Enter value of k: ";
+          cin>>k;
+
+          print_top_k_words(k);        // print top k word
+
+    }else if(tem == 2){
+          string find_word;
+          cout<<" Enter word: ";
+          cin>>find_word;
+
+          search_frequency(find_word);   // search word's frequency
+
+    }else if(tem == 3){
+          int freq;
+          cout<<" Enter frequency: ";
+          cin>>freq;
+
+          search_word(freq);        // search specific frequency's words
+
+    }else if(tem == 4 || tem == 0){
+        cout<<"|----------------------------------|"<<endl;
+        cout<<"| THANK YOU FOR USE THIS PROGRAM.. |"<<endl;
+        cout<<"|----------------------------------|"<<endl;
+        break;
+
+    }else{
+        cout<<" Enter valid number ..."<<endl;
+    }
+
+    }
+
+    delete_All();               // free all memory
+
+    return 0;
+}
