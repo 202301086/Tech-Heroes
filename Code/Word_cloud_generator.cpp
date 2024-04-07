@@ -48,6 +48,7 @@ class node         // make a class of node so we can make linked list
 node *head = NULL;        // make head ,last pointer global so we can use them in function easily
 node *last = NULL;
 
+vector<node *> sorted_nodes;    // make a vector which contain linked list 
 
 string lower_string(string s)        // Function for make string lower so we can search node easily
 {
@@ -116,18 +117,6 @@ void print_top_k_words(int k)       // Function for print top k word
         cout<<"Enter valid number ..."<<endl;    // if user enter k as negative then print error
         return;
     }
-
-
-    vector<node *> sorted_nodes;    // make a vector which contain linked list 
-    node *tem = head;
-
-    while (tem != NULL)
-    {
-        sorted_nodes.push_back(tem);    // add linkedlist's element in vector
-        tem = tem->next;
-    }
-
-    sort(sorted_nodes.begin(), sorted_nodes.end(),compareNodes);   // sort linked list
     
     cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
     cout <<"|"<< left << setw(20) << "Words" << setw(10) << "Frequency" <<" |"<< endl;  
@@ -274,6 +263,16 @@ int main()
     }
 
     file.close();                // close file when linke list created
+
+    node *tem = head;
+
+    while (tem != NULL)
+    {
+        sorted_nodes.push_back(tem);    // add linkedlist's element in vector
+        tem = tem->next;
+    }
+
+    sort(sorted_nodes.begin(), sorted_nodes.end(),compareNodes);   // sort linked list
     
     //delete_extra_words()       // delete extra word from linked list
 
