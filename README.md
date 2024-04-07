@@ -19,6 +19,8 @@ You need to build a Word Cloud Generator. The generator takes in a dynamic colle
    - Option 4 (or 0): Exit the program.
 3. Follow the on-screen instructions to perform the required operations.
 4. After each operation, the menu will appear again until you select exit.
+## Input
+When prompted, enter the name of the text file containing the words.
 ##  Group Members Name and ID
   - Ritul Jitendrakumar Patel (202301086)<br />
   - Om Sutariya (202301096)<br />
