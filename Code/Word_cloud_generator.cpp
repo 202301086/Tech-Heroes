@@ -36,7 +36,7 @@ class node         // make a class of node so we can make linked list
     node *next;
     node *pre;
 
-    node(string s)
+    node(string s){
         this->s = s;
         this->count = 1;
         this->next = NULL;
