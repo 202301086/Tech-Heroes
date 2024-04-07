@@ -141,3 +141,52 @@ void print_top_k_words(int k)       // Function for print top k word
 
     cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
 }
+
+
+void search_frequency(string s1){
+
+    s1 = lower_string(s1);       // make given string lower
+
+    int f = 0;
+    node *tem = head;
+    node* tem1 = last;
+
+    while(tem != tem1){          // Travell from both side to find word fast
+        if(tem->s == s1){
+            f = 1;              // if find that given frequency is exicts then return else f will be 0
+            break; 
+        }
+
+        if(tem1->s == s1){
+            f = 2;
+            break;
+        }
+
+        tem = tem->next;
+        tem1 = tem1->pre; 
+    }
+ 
+
+    if(f == 0){                  // if frequrncy not found
+            cout<<"|----------------|"<<endl;
+            cout<<"| Word not found |"<<endl;
+            cout<<"|----------------|"<<endl;
+    }else if(f == 1){                          // if find from head's side
+            cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+            cout <<"|"<< left << setw(20) << "Words" << setw(10) << "Frequency" <<" |"<< endl;  
+            cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+        
+            cout <<"| "<< left << setw(20) << tem->s << setw(10) << tem->count <<"|"<< endl;  
+
+            cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+    }else if(f == 2){                  // if find from last's side
+            cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+            cout <<"|"<< left << setw(20) << "Words" << setw(10) << "Frequency" <<" |"<< endl;  
+            cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+        
+            cout <<"| "<< left << setw(20) << tem1->s << setw(10) << tem1->count <<"|"<< endl;  
+
+            cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
+    }
+
+}
