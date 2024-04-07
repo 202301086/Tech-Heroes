@@ -43,7 +43,7 @@ When prompted, enter the name of the text file containing the words.
 
 ## CONTRIBUTION 
 
-  Smit Limbasiya : Algorithm , Idea Of Extra functions And implement search_word() , search_freq Function , Design In Output With iomanip header file , Linkedlist <br/>
-  Ritul Patel :  Algorithm , Print top k word function and it's all condition, Compare node function , Sorting vector , Make condition in main function  <br/>
-  Raj bhanderi : Unordered Set's all part and use of them functions , make node function  <br/>
-  Om sutariya : File handling , Define class and global variable , string lower function  <br/>
+  **Smit Limbasiya :** Algorithm , Idea Of Extra functions And implement search_word() , search_freq Function , Design In Output With iomanip header file , Linkedlist <br/>
+  **Ritul Patel :**  Algorithm , Print top k word function and it's all condition, Compare node function , Sorting vector , Make condition in main function  <br/>
+  **Raj bhanderi :** Unordered Set's all part and use of them functions , make node function  <br/>
+  **Om sutariya :** File handling , Define class and global variable , string lower function  <br/>
