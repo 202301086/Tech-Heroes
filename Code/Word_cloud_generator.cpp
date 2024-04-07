@@ -333,9 +333,9 @@ int main()
           search_word(freq);        // search specific frequency's words
 
     }else if(tem == 4 || tem == 0){
-        cout<<"|----------------------------------|"<<endl;
-        cout<<"| THANK YOU FOR USE THIS PROGRAM.. |"<<endl;
-        cout<<"|----------------------------------|"<<endl;
+        cout<<"|------------------------------------|"<<endl;
+        cout<<"| THANK YOU FOR USING THIS PROGRAM...|"<<endl;
+        cout<<"|------------------------------------|"<<endl;
         break;
 
     }else{
