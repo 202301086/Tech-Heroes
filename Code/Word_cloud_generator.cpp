@@ -203,22 +203,14 @@ void search_word(int f){       // this function search word in linked list and p
 
     int check = 0;
     node *tem = head;
-    node* tem_pre = last;
 
-    while(tem != tem_pre){            // it take O(n/2) time complexity
+    while(tem != NULL){            // it take O(n/2) time complexity
 
         if(tem->count == f){
             check = 1;
             break;
         }
-
-        if(tem_pre->count == f){
-            check = 1;
-            break;       
-        }
-
         tem = tem->next;
-        tem_pre = tem_pre->pre;
     }
 
     if(check == 0){                  // if word not found then give message
@@ -226,24 +218,18 @@ void search_word(int f){       // this function search word in linked list and p
     }else{                          // else print word and it's frequnecy
 
         node *tem = head;
-        node* tem_pre = last;
 
         cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
         cout <<"|"<< left << setw(20) << "Words" << setw(10) << "Frequency" <<" |"<< endl;  
         cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl;
 
-    while(tem != tem_pre){
+    while(tem != NULL){
 
         if(tem->count == f){
             cout <<"| "<< left << setw(20) << tem->s << setw(10) << tem->count <<"|"<< endl;           
         }
 
-        if(tem_pre->count == f){
-            cout <<"| "<< left << setw(20) << tem_pre->s << setw(10) << tem_pre->count <<"|"<< endl;
-        }
-
         tem = tem->next;
-        tem_pre = tem_pre->pre;
     }  
 
     cout <<"|"<< setfill('-') << setw(31) << "" << setfill(' ') <<"|"<< endl <<endl;
